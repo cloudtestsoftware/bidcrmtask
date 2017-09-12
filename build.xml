@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project name="bidcrmtask" basedir="." default="jar">    
+	<property name="src" value="${basedir}"/>    
+	<property name="output" value="${basedir}/build"/>
+	<property name="jarpath" value="/home/srimanta/erp/bidcrmtask/WebContent/WEB-INF/lib"/>
+	
+	<property name="libpath" value="/home/srimanta/erp/bidcrmtask/WebContent/WEB-INF/lib"/>
+		
+	<target name="compile" depends="create">        
+		<javac destdir="${output}"  debug="on">                        
+			<src path="${src}"/>                        
+			<classpath refid="java"/>        
+		</javac>    
+	</target>    
+	<target name="jar" depends="compile">        
+		<jar destfile="${libpath}/bidcrmtask.jar">            
+			<fileset dir="${output}"/>        
+		</jar>
+	</target>
+	<target name="copy" depends="jar">
+		<copy file="${libpath}/bidcrmtask.jar" tofile="${jarpath}/bidcrmtask.jar" overwrite="true" />
+	</target>
+	<target name="clean">        
+		<delete dir="${output}"/>    
+	</target>    
+	<target name="create" depends="clean">        
+		<mkdir dir="${output}"/>    
+	</target>    
+	<path id="java">        
+		<fileset dir="${libpath}">            
+			<include name="*.jar"/>        
+		</fileset>    
+	</path>
+</project>
